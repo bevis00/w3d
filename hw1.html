@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+
+<html>
+	<div align="center" valign="center">
+		<a style="font-size:200%;" href="https://jsfiddle.net/bevis00/rn29Ljrf/">jsfiddle</a>
+	</div>
+
+	<div id='light0' style='float:left; width:25%'>
+	 light 0
+	</div>
+
+	<div id='light1' style='float:right; width:25%'>
+	 light 1
+	</div><br><br><br><br><br><br>
+
+	<div id='light2' style='float:left; width:25%'>
+	 light 2
+	</div>
+
+	<div id='light3' style='float:right; width:25%'>
+	 light 3
+	</div><br><br><br><br><br><br>
+
+	<div id='light4' style='float:left; width:25%'>
+	 light 4
+	</div>
+
+	<div id='controlButton'>
+	  <button id='toggle'>
+	    On/Off
+	  </button>
+	</div>
+
+	<div id='light5' style='float:right; width:25%'>
+	 light 5
+	</div><br><br><br><br><br><br>
+
+	<div id='light6' style='float:left; width:25%'>
+	 light 6
+	</div>
+
+	<div id='light7' style='float:right; width:25%'>
+	 light 7
+	</div><br><br><br><br><br><br>
+
+	<div id='light8' style='float:left; width:25%'>
+	 light 8
+	</div>
+
+	<div id='light9' style='float:right; width:25%'>
+	 light 9
+	</div>
+<head>
+<style>
+	body {
+	    background: url(http://i.imgur.com/GYiTn79.jpg);
+	    background-size: 100% 100%;
+	    background-repeat: no-repeat;
+	}
+
+	#controlButton {
+	  position: absolute;
+	  top: 45%;
+	  width: 90%;
+	  padding: 3px;
+	  text-align:center
+	}
+</style>
+</head>
+
+<body> 
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+	function Lamp(lampId) 
+	{
+	  var name = '#' + lampId;
+	  var status = false;
+
+	  var toggleLight = function() 
+	  {
+	    status = !status;
+	    
+	    if (status) 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(242, 221, 33)');
+	    } 
+	    
+	    else 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(56, 239, 35)');
+	    }
+	  };
+	  
+	  var toggleLight2 = function() 
+	  {
+	    status = !status;
+	    
+	    if (status) 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(57, 185, 239)');
+	    } 
+	    
+	    else 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(239, 57, 33)');
+	    }
+	  };
+	  
+	  var toggleLight3 = function() 
+	  {
+	    status = !status;
+	    
+	    if (status) 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(141, 100, 229)');
+	    } 
+	    
+	    else 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(65, 156, 242)');
+	    }
+	  };
+	  
+	  var toggleLight4 = function() 
+	  {
+	    status = !status;
+	    
+	    if (status) 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(70, 221, 88)');
+	    } 
+	    
+	    else 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(234, 134, 46)');
+	    }
+	  };
+	  
+	  var toggleLight5 = function() 
+	  {
+	    status = !status;
+	    
+	    if (status) 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(196, 47, 74)');
+	    } 
+	    
+	    else 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(45, 234, 136)');
+	    }
+	  };
+	  
+	  var toggleLight6 = function() 
+	  {
+	    status = !status;
+	    
+	    if (status) 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(83, 138, 186)');
+	    } 
+	    
+	    else 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(198, 79, 198)');
+	    }
+	  };
+
+	  var toggleLight7 = function() 
+	  {
+	    status = !status;
+
+	    if (status) 
+	    {
+	      $(name).css ('backgroundColor', 'rgb(206, 102, 28)');
+	    } 
+
+	    else 
+	    {
+	      $(name).css ('backgroundColor', 'rgb(28, 206, 48)');
+	    }
+	  };
+	  
+	  var toggleLight8 = function() 
+	  {
+	    status = !status;
+	    
+	    if (status) 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(203, 211, 44)');
+	    } 
+	    
+	    else 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(47, 73, 135)');
+	    }
+	  };
+	  
+	  var toggleLight9 = function() 
+	  {
+	    status = !status;
+	    
+	    if (status) 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(219, 71, 30)');
+	    } 
+	    
+	    else 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(34, 216, 106)');
+	    }
+	  };
+	  
+	  var toggleLight10 = function() 
+	  {
+	    status = !status;
+	    
+	    if (status) 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(43, 64, 155)');
+	    } 
+	    
+	    else 
+	    {
+	    	$(name).css ('backgroundColor', 'rgb(204, 133, 53)');
+	    }
+	  };
+	  
+	  this.check = function() 
+	  {
+	    return status;
+	  }
+	  
+	  var timer;
+	  var power = false;
+	  
+	  this.toggleBlink = function() 
+	  {
+	  	power = !power;
+	    if (power === true) 
+	    {
+	  		timer = setInterval (toggleLight, 300);
+	    } 
+	    
+	    else 
+	    {
+	  		clearInterval (timer);
+	    }
+	  }
+	  
+	   this.toggleBlink2 = function() 
+	  {
+	  	power = !power;
+	    if (power === true) 
+	    {
+	  		timer = setInterval (toggleLight2, 350);
+	    } 
+	    
+	    else 
+	    {
+	  		clearInterval (timer);
+	    }
+	  }
+	  
+	  this.toggleBlink3 = function() 
+	  {
+	  	power = !power;
+	    if (power === true) 
+	    {
+	  		timer = setInterval (toggleLight3, 250);
+	    } 
+	    
+	    else 
+	    {
+	  		clearInterval (timer);
+	    }
+	  }
+	  
+	  this.toggleBlink4 = function() 
+	  {
+	  	power = !power;
+	    if (power === true) 
+	    {
+	  		timer = setInterval (toggleLight4, 200);
+	    } 
+	    
+	    else 
+	    {
+	  		clearInterval (timer);
+	    }
+	  }
+	  
+	  this.toggleBlink5 = function() 
+	  {
+	  	power = !power;
+	    if (power === true) 
+	    {
+	  		timer = setInterval (toggleLight5, 400);
+	    } 
+	    
+	    else 
+	    {
+	  		clearInterval (timer);
+	    }
+	  }
+	  
+	  this.toggleBlink6 = function() 
+	  {
+	  	power = !power;
+	    if (power === true) 
+	    {
+	  		timer = setInterval (toggleLight6, 450);
+	    } 
+	    
+	    else 
+	    {
+	  		clearInterval (timer);
+	    }
+	  }
+	  
+	  this.toggleBlink7 = function() 
+	  {
+	  	power = !power;
+	    if (power === true) 
+	    {
+	  		timer = setInterval (toggleLight7, 280);
+	    } 
+	    
+	    else 
+	    {
+	  		clearInterval (timer);
+	    }
+	  }
+	  
+	  this.toggleBlink8 = function() 
+	  {
+	  	power = !power;
+	    if (power === true) 
+	    {
+	  		timer = setInterval (toggleLight8, 320);
+	    } 
+	    
+	    else 
+	    {
+	  		clearInterval (timer);
+	    }
+	  }
+	  
+	  this.toggleBlink9 = function() 
+	  {
+	  	power = !power;
+	    if (power === true) 
+	    {
+	  		timer = setInterval (toggleLight9, 370);
+	    } 
+	    
+	    else 
+	    {
+	  		clearInterval (timer);
+	    }
+	  }
+	  
+	  this.toggleBlink10 = function() 
+	  {
+	  	power = !power;
+	    if (power === true) 
+	    {
+	  		timer = setInterval (toggleLight10, 420);
+	    } 
+	    
+	    else 
+	    {
+	  		clearInterval (timer);
+	    }
+	  }
+	}
+
+	l0 = new Lamp('light0');
+	$('#controlButton').click ( function() { l0.toggleBlink() } );
+
+	l1 = new Lamp('light1');
+	$('#controlButton').click ( function() { l1.toggleBlink2() } );
+
+	l2 = new Lamp('light2');
+	$('#controlButton').click ( function() { l2.toggleBlink3() } );
+
+	l3 = new Lamp('light3');
+	$('#controlButton').click ( function() { l3.toggleBlink4() } );
+
+	l4 = new Lamp('light4');
+	$('#controlButton').click ( function() { l4.toggleBlink5() } );
+
+	l5 = new Lamp('light5');
+	$('#controlButton').click ( function() { l5.toggleBlink6() } );
+
+	l6 = new Lamp('light6');
+	$('#controlButton').click ( function() { l6.toggleBlink7() } );
+
+	l7 = new Lamp('light7');
+	$('#controlButton').click ( function() { l7.toggleBlink8() } );
+
+	l8 = new Lamp('light8');
+	$('#controlButton').click ( function() { l8.toggleBlink9() } );
+
+	l9 = new Lamp('light9');
+	$('#controlButton').click ( function() { l9.toggleBlink10() } );
+</script>
+</body>
+
+</html>
