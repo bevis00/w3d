@@ -3,12 +3,12 @@
 <html>
 
   <div id='controlPointLight'>
-    <button>
-      PointLight switch
-    </button>
+  <button id='buttonPointLight'>
+    PointLight switch
+  </button>
   </div>
   <div id='controlSpotLight'>
-    <button>
+    <button id='buttonSpotLight'>
       SpotLight switch
     </button>
   </div>
@@ -55,7 +55,7 @@
 <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>
-  $('#controlPointLight').click(
+  $('#buttonPointLight').click(
     function() {
       var control = new ShowLight();
 
@@ -69,7 +69,7 @@
     }
   );
 
-  $('#controlSpotLight').click(
+  $('#buttonSpotLight').click(
     function() {
       var control = new ShowLight();
 
