@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html>
+
+<h1 style="text-align:center"> Homework 4</h1>
+<hr>
+<div id="container" style="float:left; margin:3px; width:60vw; height:60vw">
+</div>
+
+<div style="float:left; margin-left: 10px; width:32vw;">
+
+  <div style='background-color:#c96eef'>
+    Size:
+    <br>
+    <input type=radio id='s1' name='s' value='10'>10
+    <input type=radio id='s2' name='s' value='20'>20
+    <input type=radio id='s3' name='s' value='30'>30
+  </div>
+  <br>
+  <div style='background-color:#6fcdf2'>
+    Geometry Selector:
+    <br>
+    <input type=radio id='g1' name='g' value='box'>box
+    <input type=radio id='g2' name='g' value='sphere'>sphere
+    <input type=radio id='g3' name='g' value='cone'>cone
+  </div>
+  <br>
+  <div style='background-color:#6ff1cf'>
+    Material Selector:
+    <br>
+    <input type=radio id='m1' name='m' value='basic'>basic
+    <input type=radio id='m2' name='m' value='normal'>normal
+    <input type=radio id='m3' name='m' value='lambert'>lambert
+  </div>
+  <br>
+  <div style='background-color:#f0c56f'>
+    Color Selector:
+    <br>
+    <input type=radio id='c1' name='c' value='red'>red
+    <input type=radio id='c2' name='c' value='blue'>blue
+    <input type=radio id='c3' name='c' value='green'>green
+  </div>
+  <br>
+  <button id='clear' style="width:45%">Clear</button>
+  <button id='save' style="width:45%">Save</button>
+  <button id='restore' style="width:45%">Restore</button>
+</div>
+
+<head>
+<style>
+
+
+</style>
+</head>
+
+<body> 
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/84/three.min.js"></script>
+<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+<script>
+	var camera, scene, renderer, controls;
+	var raycaster = new THREE.Raycaster();
+	var mouse = new THREE.Vector2();
+	var pickplane;
+	var cyl;
+
+	var spheres = [];
+	var boxs = [];
+	var cones = [];
+
+	var gSelect;
+	var cSelect;
+	var mSelect;
+
+	var colorS = new THREE.Color(0xffffff);
+	var colorB = new THREE.Color(0xffffff);
+	var colorC = new THREE.Color(0xffffff);
+
+	var materialS;
+	var materialB;
+	var materialC;
+
+	var sizeS = 10;
+	var sizeB = 10;
+	var sizeC = 10;
+
+
+	init();
+	animate();
+
+	$('#g1').click(function() {
+	  gSelect = 'box';
+	});
+
+	$('#g2').click(function() {
+	  gSelect = 'sphere';
+	});
+
+	$('#g3').click(function() {
+	  gSelect = 'cone';
+	});
+
+	$('#c1').click(function() {
+
+	  if (gSelect === 'box') {
+	    colorB = new THREE.Color(0xff0000);
+	  } else if (gSelect === 'sphere') {
+	    colorS = new THREE.Color(0xff0000);
+	  } else if (gSelect === 'cone') {
+	    colorC = new THREE.Color(0xff0000);
+	  }
+
+	});
+
+	$('#c2').click(function() {
+
+	  if (gSelect === 'box') {
+	    colorB = new THREE.Color(0x00000ff);
+	  } else if (gSelect === 'sphere') {
+	    colorS = new THREE.Color(0x00000ff);
+	  } else if (gSelect === 'cone') {
+	    colorC = new THREE.Color(0x00000ff);
+	  }
+
+	});
+
+	$('#c3').click(function() {
+
+	  if (gSelect === 'box') {
+	    colorB = new THREE.Color(0x00ff00);
+	  } else if (gSelect === 'sphere') {
+	    colorS = new THREE.Color(0x00ff00);
+	  } else if (gSelect === 'cone') {
+	    colorC = new THREE.Color(0x00ff00);
+	    }
+
+	});
+
+	$('#m1').click(function() {
+
+	  if (gSelect === 'box') {
+	    materialB = new THREE.MeshBasicMaterial();
+	  } else if (gSelect === 'sphere') {
+	    materialS = new THREE.MeshBasicMaterial();
+	  } else if (gSelect === 'cone') {
+	    materialC = new THREE.MeshBasicMaterial();
+	  }
+
+	});
+
+	$('#m2').click(function() {
+
+	  if (gSelect === 'box') {
+	    materialB = new THREE.MeshNormalMaterial();
+	  } else if (gSelect === 'sphere') {
+	    materialS = new THREE.MeshNormalMaterial();
+	  } else if (gSelect === 'cone') {
+	    materialC = new THREE.MeshNormalMaterial();
+	  }
+
+	});
+
+	$('#m3').click(function() {
+
+	  if (gSelect === 'box') {
+	    materialB = new THREE.MeshLambertMaterial();
+	  } else if (gSelect === 'sphere') {
+	    materialS = new THREE.MeshLambertMaterial();
+	  } else if (gSelect === 'cone') {
+	    materialC = new THREE.MeshLambertMaterial();
+	  }
+
+	});
+
+	$('#s1').click(function() {
+	  var i;
+
+	  if (gSelect === 'box') {
+	    sizeB = 10;
+	  } else if (gSelect === 'sphere') {
+	    sizeS = 10;
+	  } else if (gSelect === 'cone') {
+	  	sizeC = 10;
+	  }
+
+	});
+
+	$('#s2').click(function() {
+	  var i;
+
+	  if (gSelect === 'box') {
+	    sizeB = 20;
+	  } else if (gSelect === 'sphere') {
+	    sizeS = 20;
+	  } else if (gSelect === 'cone') {
+	  	sizeC = 20;
+	  }
+
+	});
+
+	$('#s3').click(function() {
+	  var i;
+
+	  if (gSelect === 'box') {
+	    sizeB = 30;
+	  } else if (gSelect === 'sphere') {
+	    sizeS = 30;
+	  } else if (gSelect === 'cone') {
+	  	sizeC = 30;
+	  }
+
+	});
+
+	$('#clear').click(function() {
+
+	  spheres.forEach(function(sphere) {
+	    scene.remove(sphere);
+	  });
+	  spheres = [];
+
+	  boxs.forEach(function(box) {
+	    scene.remove(box);
+	  });
+	  boxs = [];
+
+	  cones.forEach(function(cone) {
+	    scene.remove(cone);
+	  });
+	  cones = [];
+
+	});
+
+	$('#save').click(function() {
+
+	  var statesS = [];
+	  var statesB = [];
+	  var statesC = [];
+
+	  spheres.forEach(function(sphere) {
+	    statesS.push(sphere.name);
+	  });
+
+	  boxs.forEach(function(box) {
+	    statesB.push(box.name);
+	  });
+
+	  cones.forEach(function(cone) {
+	    statesC.push(cone.name);
+	  });
+
+	  localStorage.setItem('stateStrS', JSON.stringify(statesS));
+	  localStorage.setItem('stateStrB', JSON.stringify(statesB));
+	  localStorage.setItem('stateStrC', JSON.stringify(statesC));
+
+	});
+
+	$('#restore').click(function() {
+
+	  var statesS = JSON.parse(localStorage.getItem('stateStrS'));
+	  var statesB = JSON.parse(localStorage.getItem('stateStrB'));
+	  var statesC = JSON.parse(localStorage.getItem('stateStrC'));
+
+	  statesS.forEach(function(stateStrS) {
+	    console.log(stateStrS);
+	    var statesS = JSON.parse(stateStrS);
+	    buildSphere(statesS.rad, new THREE.Vector3(statesS.pos[0], 0, statesS.pos[1]), colorS, materialS);
+	  });
+
+	  statesB.forEach(function(stateStrB) {
+	    console.log(stateStrB);
+	    var statesB = JSON.parse(stateStrB);
+	    buildBox(statesB.rad, new THREE.Vector3(statesB.pos[0], 0, statesB.pos[1]), colorB, materialB);
+	  });
+
+	  statesC.forEach(function(stateStrC) {
+	    console.log(stateStrC);
+	    var statesC = JSON.parse(stateStrC);
+	    buildCone(statesC.rad, new THREE.Vector3(statesC.pos[0], 0, statesC.pos[1]), colorC, materialC);
+	  });
+
+	});
+
+	function buildSphere(rad, pos, color, material) {
+
+	  var sphere = new THREE.Mesh(new THREE.SphereGeometry(rad, 20, 20), material);
+
+	  sphere.material.color = color;
+
+	  scene.add(sphere);
+	  var prop = {
+	    rad: rad,
+	    pos: [pos.x, pos.z]
+	  };
+	  console.log(prop);
+	  sphere.name = JSON.stringify(prop);
+	  console.log(sphere.name);
+
+	  spheres.push(sphere);
+	  sphere.position.copy(pos);
+
+	}
+
+	function buildBox(rad, pos, color, material) {
+
+	  var box = new THREE.Mesh(new THREE.BoxGeometry(rad, rad, rad), material);
+
+	  box.material.color = color;
+
+	  scene.add(box);
+	  var prop = {
+	    rad: rad,
+	    pos: [pos.x, pos.z]
+	  };
+	  console.log(prop);
+	  box.name = JSON.stringify(prop);
+	  console.log(box.name);
+
+	  boxs.push(box);
+	  box.position.copy(pos);
+
+	}
+
+	function buildCone(rad, pos, color, material) {
+
+	  var cone = new THREE.Mesh(new THREE.ConeGeometry(rad, 20, 32), material);
+
+	  cone.material.color = color;
+
+	  scene.add(cone);
+	  var prop = {
+	    rad: rad,
+	    pos: [pos.x, pos.z]
+	  };
+	  console.log(prop);
+	  cone.name = JSON.stringify(prop);
+	  console.log(cone.name);
+
+	  cones.push(cone);
+	  cone.position.copy(pos);
+
+	}
+
+	function init() {
+
+	  var ww = $("#container").innerWidth();
+	  var hh = $("#container").innerHeight();
+	  renderer = new THREE.WebGLRenderer();
+	  renderer.setSize(ww, hh);
+	  renderer.setClearColor(0x888888);
+	  $("#container").append(renderer.domElement);
+
+	  ////////////////////////////////////////////////
+
+	  scene = new THREE.Scene();
+	  camera = new THREE.PerspectiveCamera(50, ww / hh, 1, 1000);
+	  camera.position.y = 500;
+	  camera.position.z = 100;
+	  scene.add(camera);
+
+	  var pointLight = new THREE.PointLight(0xffffff, 1.5, 1000);
+	  pointLight.position.set(0, 200, 0);
+	  scene.add(pointLight);
+
+	  var directionalLight = new THREE.DirectionalLight(0xffffff, 0.1);
+	  scene.add(directionalLight);
+
+	  var cyl_geom = new THREE.RingGeometry(5, 10, 32);
+	  var cyl_mat = new THREE.MeshBasicMaterial({
+	    color: 0xff1234,
+	  });
+	  cyl = new THREE.Mesh(cyl_geom, cyl_mat);
+	  cyl.rotation.x = -Math.PI / 2;
+	  cyl.position.set(-20, 0, 20);
+	  scene.add(cyl);
+
+	  pickplane = new THREE.Mesh(new THREE.PlaneGeometry(200, 200),
+	    new THREE.MeshBasicMaterial({
+	      color: 0xff1234
+	    }));
+	  pickplane.rotation.x = -Math.PI / 2;
+	  scene.add(pickplane);
+	  pickplane.material.visible = false;
+
+	  var gridXZ = new THREE.GridHelper(200, 20, 'red', 'white');
+	  scene.add(gridXZ);
+
+	  controls = new THREE.OrbitControls(camera, renderer.domElement);
+	  window.addEventListener('resize', onWindowResize, false);
+	  window.addEventListener('mousemove', onDocumentMouseMove, false);
+	  window.addEventListener('mousedown', onDocumentMouseDown, false);
+	}
+
+	function onWindowResize() {
+	  var ww = $("#container").innerWidth();
+	  var hh = $("#container").innerHeight();
+
+	  camera.aspect = ww / hh;
+	  camera.updateProjectionMatrix();
+	  renderer.setSize(ww, hh);
+	}
+
+	function onDocumentMouseMove(event) {
+
+	  event.preventDefault();
+
+	  var viewportPos = $('#container').get(0).getBoundingClientRect();
+	  mouse.x = ((event.clientX - viewportPos.left) / $('#container').innerWidth()) * 2 - 1;
+	  mouse.y = -((event.clientY - viewportPos.top) / $('#container').innerHeight()) * 2 + 1;
+
+	  raycaster.setFromCamera(mouse, camera);
+	  var intersects = raycaster.intersectObject(pickplane);
+	  if (intersects.length > 0) {
+	    cyl.position.copy(intersects[0].point);
+	    cyl.position.y = 2;
+	  }
+	}
+
+	function onDocumentMouseDown(event) {
+
+	  event.preventDefault();
+
+	  var viewportPos = $('#container').get(0).getBoundingClientRect();
+	  mouse.x = ((event.clientX - viewportPos.left) / $('#container').innerWidth()) * 2 - 1;
+	  mouse.y = -((event.clientY - viewportPos.top) / $('#container').innerHeight()) * 2 + 1;
+
+	  raycaster.setFromCamera(mouse, camera);
+	  var intersects = raycaster.intersectObject(pickplane);
+	  if (intersects.length > 0) {
+	    cyl.position.copy(intersects[0].point);
+	    if (gSelect === 'box') {
+	      buildBox(sizeB, intersects[0].point, colorB, materialB);
+	    } else if (gSelect === 'sphere') {
+	      buildSphere(sizeS, intersects[0].point, colorS, materialS);
+	    } else if (gSelect === 'cone') {
+	      buildCone(sizeC, intersects[0].point, colorC, materialC);
+	    }
+	  }
+	}
+
+	function animate() {
+
+	  controls.update();
+	  requestAnimationFrame(animate);
+	  render();
+	}
+
+	function render() {
+	  renderer.render(scene, camera);
+	}
+</script>
+</body>
+
+</html>
