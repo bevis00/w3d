@@ -353,8 +353,8 @@
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     raycaster = new THREE.Raycaster();
-    document.addEventListener('mousedown', onDocumentMouseDown, false);
-    document.addEventListener('mousemove', onDocumentMouseMove, false);
+    document.addEventListener('pointerdown', onDocumentMouseDown, false);
+    document.addEventListener('pointermove', onDocumentMouseMove, false);
 
   }
 

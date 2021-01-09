@@ -385,8 +385,8 @@
 
 	  controls = new THREE.OrbitControls(camera, renderer.domElement);
 	  window.addEventListener('resize', onWindowResize, false);
-	  window.addEventListener('mousemove', onDocumentMouseMove, false);
-	  window.addEventListener('mousedown', onDocumentMouseDown, false);
+	  window.addEventListener('pointermove', onDocumentMouseMove, false);
+	  window.addEventListener('pointerdown', onDocumentMouseDown, false);
 	}
 
 	function onWindowResize() {
